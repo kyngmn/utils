@@ -8,19 +8,20 @@
  * 투명도는 0부터 255 사이의 값
  */
 export default function addTransparencyOnHexColor(hexColor, transparency) {
-    // 1 ~ 10의 자리의 값만 유효 처리
-    transparency = transparency % 100;
-    // 투명도를 0에서 255 사이의 값으로 변환
-    var alpha = Math.round((transparency / 100) * 255);
-    // 알파 값을 16진수 문자열로 변환 (두 자리로 맞춤)
-    var alphaHex = alpha.toString(16);
-    switch (alphaHex.length) {
-        case 1:
-            alphaHex = '0' + alphaHex;
-            break;
-        case 0:
-            alphaHex = '00';
-            break;
-    }
-    return (hexColor + alphaHex).toUpperCase();
+  if (typeof transparency !== 'number' || isNaN(transparency)) return hexColor;
+  // 1 ~ 10의 자리의 값만 유효 처리
+  transparency = transparency % 100;
+  // 투명도를 0에서 255 사이의 값으로 변환
+  var alpha = Math.round((transparency / 100) * 255);
+  // 알파 값을 16진수 문자열로 변환 (두 자리로 맞춤)
+  var alphaHex = alpha.toString(16);
+  switch (alphaHex.length) {
+    case 1:
+      alphaHex = '0' + alphaHex;
+      break;
+    case 0:
+      alphaHex = '00';
+      break;
+  }
+  return (hexColor + alphaHex).toUpperCase();
 }

@@ -11,6 +11,7 @@ export default function addTransparencyOnHexColor(
   hexColor: string,
   transparency: number
 ): string {
+  if (typeof transparency !== 'number' || isNaN(transparency)) return hexColor;
   // 1 ~ 10의 자리의 값만 유효 처리
   transparency = transparency % 100;
   // 투명도를 0에서 255 사이의 값으로 변환
